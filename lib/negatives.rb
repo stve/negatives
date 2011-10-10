@@ -18,6 +18,7 @@ module Negatives
     nil
   end
 
+  private
   def strategies
     return @matchers unless @matchers.empty?
 
