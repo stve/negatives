@@ -8,7 +8,7 @@ Negatives is a ruby library for quickly resolving image urls from link shortener
 Installation
 ------------
 
-    (sudo) gem install yql-query
+    (sudo) gem install negatives
 
 Usage
 -----
