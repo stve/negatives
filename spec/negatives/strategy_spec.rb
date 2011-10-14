@@ -28,21 +28,14 @@ describe Negatives::Strategy do
       stub_success('http://twitpic.com/omg')
       stub_success('http://yfrog.com/abc')
 
-      stub_redirect('http://yfrog.com/1234', 'http://yfrog.com/abc')
-
       @uri = nil
-      @strategy = Negatives::Strategy.new(/yfrog/) { |uri| @uri = uri }
+      @strategy = Negatives::Strategy.new(/twitpic/) { |uri| @uri = uri }
     end
 
     it 'yields a URI' do
       @strategy.process('http://twitpic.com/omg')
       @uri.should be_kind_of(URI)
       @uri.path.should eq('/omg')
-    end
-
-    it 'follows redirects' do
-      @strategy.process('http://yfrog.com/1234')
-      @uri.to_s.should eq('http://yfrog.com/abc')
     end
   end
 end

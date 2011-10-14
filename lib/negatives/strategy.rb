@@ -1,5 +1,3 @@
-require 'net/http'
-
 module Negatives
   class Strategy
 
@@ -15,22 +13,8 @@ module Negatives
     end
 
     def process(url)
-      uri = URI.parse(redirect(url))
+      uri = URI.parse(url)
       @block.call(uri)
-    end
-
-    def redirect(url)
-      response = Net::HTTP.get_response(URI.parse(url))
-
-      count = 0
-      while count < 3 && response.kind_of?(Net::HTTPRedirection)
-        url = response['location']
-        response = Net::HTTP.get_response(URI.parse(url))
-
-        count += 1
-      end
-
-      url
     end
   end
 end

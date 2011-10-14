@@ -1,5 +1,7 @@
 require 'negatives/strategy'
 require 'negatives/dom_strategy'
+require 'negatives/oembed_strategy'
+require 'negatives/redirection_strategy'
 
 module Negatives
   extend self
@@ -23,9 +25,9 @@ module Negatives
     return @matchers unless @matchers.empty?
 
     # link shorteners
-    @matchers << Strategy.new(/bit\.ly/) { |uri| uri.to_s }
-    @matchers << Strategy.new(/t\.co/) { |uri| uri.to_s }
-    @matchers << Strategy.new(/fb\.me/) { |uri| uri.to_s }
+    @matchers << RedirectionStrategy.new(/bit\.ly/) { |uri| uri.to_s }
+    @matchers << RedirectionStrategy.new(/t\.co/) { |uri| uri.to_s }
+    @matchers << RedirectionStrategy.new(/fb\.me/) { |uri| uri.to_s }
 
     # image services
     @matchers << Strategy.new(/yfrog\.com/) { |uri| "http://yfrog.com#{uri.path}:medium" }
@@ -36,8 +38,10 @@ module Negatives
     @matchers << Strategy.new(/moby\.to/) { |uri| "http://moby.to#{uri.path}:full" }
     @matchers << Strategy.new(/imgur\.com/) { |uri| "http://i.imgur.com/#{uri.path.split('/').last}.jpg" }
 
+    # oembed interpreters
+    @matchers << OembedStrategy.new(/instagr\.am/) { |data| nil }
+
     # dom interpreters
-    @matchers << DomStrategy.new(/instagr\.am/) { |dom| dom.at_css('img.photo')['src'] }
     @matchers << DomStrategy.new(/posterous\.com/) { |dom| dom.at_css('img[width="500"]')['src'] }
 
     @matchers
