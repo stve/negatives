@@ -6,6 +6,9 @@ require 'negatives/redirection_strategy'
 module Negatives
   extend self
 
+  MIME_TYPES = %w(image/jpeg image/gif image/pjpeg image/png)
+  EXTENSIONS = %w(jpeg jpg gif png)
+
   @matchers = []
 
   def extract(url)
@@ -39,7 +42,7 @@ module Negatives
     @matchers << Strategy.new(/imgur\.com/) { |uri| "http://i.imgur.com/#{uri.path.split('/').last}.jpg" }
 
     # oembed interpreters
-    @matchers << OembedStrategy.new(/instagr\.am/) { |data| nil }
+    @matchers << OembedStrategy.new(/instagr\.am/) { |data| data.thumbnail_url }
 
     # dom interpreters
     @matchers << DomStrategy.new(/posterous\.com/) { |dom| dom.at_css('img[width="500"]')['src'] }
@@ -49,6 +52,6 @@ module Negatives
 
   def image?(url)
     uri = URI.parse(url)
-    ['jpeg', 'jpg', 'png', 'gif'].include?(uri.path.split('.').last)
+    EXTENSIONS.include?(uri.path.split('.').last)
   end
 end
