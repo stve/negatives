@@ -4,7 +4,7 @@ describe Negatives::Strategy do
   describe '.new' do
     it 'initializes with a regex and a proc' do
       strategy = Negatives::Strategy.new(/yfrog/) { |uri| }
-      strategy.regex.should be_kind_of(Regexp)
+      strategy.pattern.should be_kind_of(Regexp)
       strategy.block.should be_kind_of(Proc)
     end
   end

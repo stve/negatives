@@ -1,15 +1,15 @@
 module Negatives
   class Strategy
 
-    attr_accessor :regex, :block
+    attr_accessor :pattern, :block
 
-    def initialize(regex, &block)
-      @regex = regex
+    def initialize(pattern, &block)
+      @pattern = pattern
       @block = block
     end
 
     def match?(url)
-      !(url =~ @regex).nil?
+      !(url =~ @pattern).nil?
     end
 
     def process(url)
