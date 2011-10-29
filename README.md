@@ -19,8 +19,7 @@ Usage
 TODO
 ----
 
-* oEmbed Strategy
-* more image services: flickr, lockerz, pic.twitter.com
+* more image services: flickr, lockerz, pic.twitter.com, etc.
 
 Note on Patches/Pull Requests
 -----------------------------
