@@ -1,14 +1,11 @@
-require 'net/http'
+require 'roe'
 
 module Negatives
-  class OembedStrategy < Strategy
+  class OembedStrategy < RedirectionStrategy
 
     def process(url)
-      # http://instagr.am/api/v1/oembed/?url=http://instagr.am/p/BT7lU/&maxwidth=500
-      # uri = URI.parse(url)
-      # response = Net::HTTP.get_response(uri)
-      # doc = Nokogiri::HTML(response.body)
-      @block.call(uri)
+      oembed_data = Roe.resolve(follow(url))
+      @block.call(oembed_data)
     end
   end
 end

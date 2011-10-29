@@ -7,14 +7,12 @@ module Negatives
     REDIRECT_LIMIT = 3
 
     def process(url)
-      uri = URI.parse(resolve(url))
+      uri = URI.parse(follow(url))
       @block.call(uri)
     end
 
     private
-    def resolve(url)
-      count = 0
-
+    def follow(url)
       response = request(url)
       response.env[:url]
     end

@@ -1,7 +1,7 @@
 require 'negatives/strategy'
+require 'negatives/redirection_strategy'
 require 'negatives/dom_strategy'
 require 'negatives/oembed_strategy'
-require 'negatives/redirection_strategy'
 
 module Negatives
   extend self
@@ -27,11 +27,6 @@ module Negatives
   def strategies
     return @matchers unless @matchers.empty?
 
-    # link shorteners
-    @matchers << RedirectionStrategy.new(/bit\.ly/) { |uri| uri.to_s }
-    @matchers << RedirectionStrategy.new(/t\.co/) { |uri| uri.to_s }
-    @matchers << RedirectionStrategy.new(/fb\.me/) { |uri| uri.to_s }
-
     # image services
     @matchers << Strategy.new(/yfrog\.com/) { |uri| "http://yfrog.com#{uri.path}:medium" }
     @matchers << Strategy.new(/twitpic\.com/) { |uri| "http://twitpic.com/show/full#{uri.path}" }
@@ -46,6 +41,11 @@ module Negatives
 
     # dom interpreters
     @matchers << DomStrategy.new(/posterous\.com/) { |dom| dom.at_css('img[width="500"]')['src'] }
+
+    # link shorteners
+    @matchers << RedirectionStrategy.new(/bit\.ly/) { |uri| uri.to_s }
+    @matchers << RedirectionStrategy.new(/fb\.me/) { |uri| uri.to_s }
+    @matchers << RedirectionStrategy.new(/t\.co/) { |uri| uri.to_s }
 
     @matchers
   end

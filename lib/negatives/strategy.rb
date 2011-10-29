@@ -9,7 +9,7 @@ module Negatives
     end
 
     def match?(url)
-      !(url =~ @pattern).nil?
+      @pattern.match(url)
     end
 
     def process(url)

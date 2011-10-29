@@ -2,11 +2,10 @@ require 'net/http'
 require 'nokogiri'
 
 module Negatives
-  class DomStrategy < Strategy
+  class DomStrategy < RedirectionStrategy
 
     def process(url)
-      uri = URI.parse(url)
-      response = Net::HTTP.get_response(uri)
+      response = request(url)
       doc = Nokogiri::HTML(response.body)
       @block.call(doc)
     end

@@ -5,6 +5,7 @@ require File.expand_path('../../lib/negatives', __FILE__)
 
 require 'rspec'
 require 'webmock'
+require 'rash'
 include WebMock::API
 
 def stub_redirect(url, redirect_url)

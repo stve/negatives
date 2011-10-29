@@ -73,14 +73,15 @@ describe 'Strategy Implementation' do
     end
   end
 
-  context 'OEmbed Providers' do
+  context 'oEmbed Providers' do
     before(:all) do
-      stub_success('http://instagr.am/p/OoFVV/', fixture('instagram.html'))
+      json = '{ "type" : "image", "thumbnail_url" : "http://distillery.s3.amazonaws.com/media/2011/09/30/aab58b51eb2c452ea16cb2856ae64825_7.jpg"}'
+      stub_success('http://instagr.am/p/OoFVV/')
+      stub_success('http://api.instagram.com/oembed?format=json&url=http://instagr.am/p/OoFVV/', json)
     end
 
     it 'resolves instagram urls' do
-      # Negatives.extract('http://instagr.am/p/OoFVV/').should eq("http://distillery.s3.amazonaws.com/media/2011/09/30/aab58b51eb2c452ea16cb2856ae64825_7.jpg")
-      pending
+      Negatives.extract('http://instagr.am/p/OoFVV/').should eq("http://distillery.s3.amazonaws.com/media/2011/09/30/aab58b51eb2c452ea16cb2856ae64825_7.jpg")
     end
   end
 end
