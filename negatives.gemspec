@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "faraday", "~> 0.7"
   gem.add_dependency "faraday-stack", "~> 0.1"
   gem.add_dependency 'nokogiri', '~> 1.5'
-  gem.add_dependency 'roe', '~> 0.1.0'
+  gem.add_dependency 'roe', '~> 0.1'
 
   gem.add_development_dependency 'rake', '~> 0.9'
   gem.add_development_dependency 'rdiscount', '~> 1.6'
