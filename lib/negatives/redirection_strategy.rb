@@ -1,10 +1,7 @@
-require 'faraday'
-require 'faraday_stack/follow_redirects'
+require 'negatives/client'
 
 module Negatives
   class RedirectionStrategy < Strategy
-
-    REDIRECT_LIMIT = 3
 
     def process(url)
       uri = URI.parse(follow(url))
@@ -18,13 +15,11 @@ module Negatives
     end
 
     def request(url)
-      uri = URI.parse(url)
-      conn = Faraday.new "#{uri.scheme}://#{uri.host}" do |builder|
-        builder.use FaradayStack::FollowRedirects
-        builder.adapter(Faraday.default_adapter)
-      end
+      client.request(url)
+    end
 
-      conn.get "#{uri.path}?#{uri.query}"
+    def client
+      Client.new
     end
 
   end

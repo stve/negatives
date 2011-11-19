@@ -1,10 +1,10 @@
 require 'roe'
 
 module Negatives
-  class OembedStrategy < RedirectionStrategy
+  class OembedStrategy < Strategy
 
     def process(url)
-      oembed_data = Roe.resolve(follow(url))
+      oembed_data = Roe.resolve(url)
       @block.call(oembed_data)
     end
   end

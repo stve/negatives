@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe 'Strategy Implementation' do
+  before(:each) do
+    Negatives.reset
+  end
+
   context 'Link Shorteners' do
     before(:all) do
       stub_redirect('http://bit.ly/af435', 'http://someimage.com/photo.jpg')
