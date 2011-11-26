@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.author      = "Steve Agalloco"
   gem.email       = 'steve.agalloco@gmail.com'
   gem.homepage    = 'http://rubygems.org/gems/negatives'
-  gem.description = %q{TODO: Write a gem description}
-  gem.summary     = %q{TODO: Write a gem summary}
+  gem.description = 'Easily resolve image hosting services to underlying image urls.'
+  gem.summary     = gem.description
 
   gem.require_paths = ['lib']
 
