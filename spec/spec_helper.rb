@@ -18,6 +18,11 @@ def stub_success(url, body = '')
   stub_request(:get, url).to_return(:status => 200, :body => body, :headers => {})
 end
 
+def stub_failure(url)
+  stub_request(:head, url).to_return(:status => 500, :body => '', :headers => {})
+  stub_request(:get, url).to_return(:status => 500, :body => '', :headers => {})
+end
+
 def fixture_path
   File.expand_path("../fixtures", __FILE__)
 end

@@ -34,16 +34,20 @@ module Negatives
   @strategies << RedirectionStrategy.new(/t\.co/) { |uri| uri.to_s }
 
   def extract(url)
-    return unless url
-    return unless is_url?(url)
+    begin
+      return unless url
+      return unless is_url?(url)
 
-    url = root(url)
+      url = root(url)
 
-    @strategies.each do |strategy|
-      return strategy.process(url) if strategy.match?(url)
+      @strategies.each do |strategy|
+        return strategy.process(url) if strategy.match?(url)
+      end
+
+      return url if image?(url)
+    rescue Faraday::Error::ClientError => e
+      url = nil
     end
-
-    return url if image?(url)
 
     nil
   end

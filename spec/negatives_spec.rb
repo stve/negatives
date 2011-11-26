@@ -7,6 +7,7 @@ describe Negatives do
       stub_success('http://twitpic.com/foobar')
       stub_success('http://randomurl.com/image.jpg')
       stub_success('http://something.com/about/')
+      stub_failure('http://another.com/url')
     end
 
     it 'returns nil when no match found' do
@@ -27,6 +28,10 @@ describe Negatives do
 
     it 'returns the url when a match is found' do
       Negatives.extract('http://twitpic.com/foobar').should eq("http://twitpic.com/show/full/foobar")
+    end
+
+    it 'returns nil when receiving a 500' do
+      Negatives.extract('http://another.com/url').should be_nil
     end
   end
 
