@@ -15,7 +15,7 @@ module Negatives
     end
 
     def request(url)
-      client.request(url)
+      client.head(url)
     end
 
     def client

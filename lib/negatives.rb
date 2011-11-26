@@ -35,6 +35,9 @@ module Negatives
 
   def extract(url)
     return unless url
+    return unless is_url?(url)
+
+    url = root(url)
 
     @strategies.each do |strategy|
       return strategy.process(url) if strategy.match?(url)
@@ -49,5 +52,15 @@ module Negatives
   def image?(url)
     uri = URI.parse(url)
     EXTENSIONS.include?(uri.path.split('.').last)
+  end
+
+  def root(url)
+    client = Client.new
+    r = client.head(url)
+    r.env[:url].to_s
+  end
+
+  def is_url?(url)
+    url.match(/http(s)?\:\/\//)
   end
 end

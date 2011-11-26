@@ -9,11 +9,13 @@ require 'rash'
 include WebMock::API
 
 def stub_redirect(url, redirect_url)
+  stub_request(:head, url).to_return(:status => 301, :headers => { 'Location' => redirect_url })
   stub_request(:get, url).to_return(:status => 301, :headers => { 'Location' => redirect_url })
 end
 
 def stub_success(url, body = '')
-  stub_request(:get, url).to_return(:status => 200, :body => body)
+  stub_request(:head, url).to_return(:status => 200, :headers => {})
+  stub_request(:get, url).to_return(:status => 200, :body => body, :headers => {})
 end
 
 def fixture_path

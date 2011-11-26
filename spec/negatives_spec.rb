@@ -5,6 +5,8 @@ describe Negatives do
   describe '.extract' do
     before(:all) do
       stub_success('http://twitpic.com/foobar')
+      stub_success('http://randomurl.com/image.jpg')
+      stub_success('http://something.com/about/')
     end
 
     it 'returns nil when no match found' do
@@ -30,7 +32,7 @@ describe Negatives do
 
   describe ".adapter" do
     it "should return the default adapter" do
-      Negatives.adapter.should == Negatives::Configuration::DEFAULT_ADAPTER
+      Negatives.adapter.should eq(Negatives::Configuration::DEFAULT_ADAPTER)
     end
   end
 
@@ -43,14 +45,14 @@ describe Negatives do
 
   describe ".user_agent" do
     it "should return the default user agent" do
-      Negatives.user_agent.should == Negatives::Configuration::DEFAULT_USER_AGENT
+      Negatives.user_agent.should eq(Negatives::Configuration::DEFAULT_USER_AGENT)
     end
   end
 
   describe ".user_agent=" do
     it "should set the user_agent" do
       Negatives.user_agent = 'Custom User Agent'
-      Negatives.user_agent.should == 'Custom User Agent'
+      Negatives.user_agent.should eq('Custom User Agent')
     end
   end
 
@@ -59,7 +61,7 @@ describe Negatives do
       it "should set the #{key}" do
         Negatives.configure do |config|
           config.send("#{key}=", key)
-          Negatives.send(key).should == key
+          Negatives.send(key).should eq(key)
         end
       end
     end

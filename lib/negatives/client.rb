@@ -12,10 +12,18 @@ module Negatives
       end
     end
 
-    def request(url)
+    def head(url)
+      request(:head, url)
+    end
+
+    def get(url)
+      request(:get, url)
+    end
+
+    def request(method, url)
       uri = URI.parse(url)
 
-      connection(uri).get "#{uri.path}?#{uri.query}"
+      connection(uri).send(method, "#{uri.path}?#{uri.query}")
     end
 
     def connection(uri)
