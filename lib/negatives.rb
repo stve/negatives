@@ -8,9 +8,6 @@ module Negatives
   extend Configuration
   extend self
 
-  MIME_TYPES = %w(image/jpeg image/gif image/pjpeg image/png)
-  EXTENSIONS = %w(jpeg jpg gif png)
-
   @strategies = []
 
   # image services
@@ -55,7 +52,7 @@ module Negatives
   private
   def image?(url)
     uri = URI.parse(url)
-    EXTENSIONS.include?(uri.path.split('.').last)
+    %w(jpeg jpg gif png).include?(uri.path.split('.').last)
   end
 
   def root(url)

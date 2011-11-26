@@ -3,7 +3,7 @@ Negatives
 
 ![Pyscho](https://github.com/spagalloco/negatives/raw/master/psycho.png)
 
-Negatives is a ruby library for quickly resolving image urls from link shorteners as well as image hosting services like yfrog and twitpic.
+Negatives is a ruby library for quickly resolving image urls from link shorteners and image hosting services like yfrog and twitpic.
 
 Installation
 ------------
