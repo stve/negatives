@@ -1,6 +1,8 @@
 Negatives
 =========
 
+Note: I never released this as a gem, it's somewhat out of date at this point and needs a little TLC.  I may eventually turn it into a real gem, until then, here it rests.
+
 ![Pyscho](https://github.com/spagalloco/negatives/raw/master/psycho.png)
 
 Negatives is a ruby library for quickly resolving image urls from link shorteners and image hosting services like yfrog and twitpic.
@@ -35,4 +37,4 @@ Note on Patches/Pull Requests
 Copyright
 ---------
 
-Copyright (c) 2011 Steve Agalloco. See LICENSE for details.
+Copyright (c) 2012 Steve Agalloco. See LICENSE for details.
